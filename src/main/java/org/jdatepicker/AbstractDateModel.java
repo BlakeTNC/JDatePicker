@@ -36,7 +36,6 @@ import java.util.Set;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import org.joda.time.LocalDate;
 
 /**
  * Created 18 April 2010 Updated 26 April 2010
@@ -114,13 +113,6 @@ public abstract class AbstractDateModel<T> implements DateModel<T> {
             return null;
         }
         return fromCalendar(calendarValue);
-    }
-
-    public LocalDate getLocalDate() {
-        if (!selected) {
-            return null;
-        }
-        return new LocalDate(this.getYear(), this.getMonth(), this.getDay());
     }
 
     public void setDay(int day) {
@@ -217,14 +209,6 @@ public abstract class AbstractDateModel<T> implements DateModel<T> {
         firePropertyChange(PROPERTY_MONTH, oldMonthValue, this.calendarValue.get(Calendar.MONTH));
         firePropertyChange(PROPERTY_DAY, oldDayValue, this.calendarValue.get(Calendar.DATE));
         firePropertyChange(PROPERTY_VALUE, oldValue, getValue());
-    }
-
-    public void setLocalDate(LocalDate date) {
-        if (date == null) {
-            setSelected(false);
-            return;
-        }
-        setDate(date.getYear(), date.getMonthOfYear(), date.getDayOfMonth());
     }
 
     public boolean isSelected() {
